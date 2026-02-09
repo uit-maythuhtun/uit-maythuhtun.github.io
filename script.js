@@ -346,4 +346,55 @@
         });
     });
 
+    /* ─── RANDOM GLITCH LINES (Valorant sci-fi) ─── */
+    const glitchContainer = document.getElementById('glitchLines');
+    if (glitchContainer) {
+        function spawnGlitchLine() {
+            const line = document.createElement('div');
+            line.className = 'gl-line';
+            line.style.top = Math.random() * 100 + '%';
+            line.style.height = (Math.random() * 2 + 0.5) + 'px';
+            line.style.animationDuration = (Math.random() * 0.15 + 0.05) + 's';
+            if (Math.random() > 0.6) {
+                line.style.background = 'rgba(0,212,170,.1)';
+            }
+            glitchContainer.appendChild(line);
+            setTimeout(() => line.remove(), 300);
+        }
+
+        function glitchLoop() {
+            // Burst of 1-3 lines at random intervals
+            const count = Math.floor(Math.random() * 3) + 1;
+            for (let i = 0; i < count; i++) {
+                setTimeout(spawnGlitchLine, i * 30);
+            }
+            // Next burst in 2-6 seconds
+            setTimeout(glitchLoop, Math.random() * 4000 + 2000);
+        }
+        setTimeout(glitchLoop, 3000);
+    }
+
+    /* ─── SECTION HEADER GLITCH on scroll into view ─── */
+    const glitchHeaders = document.querySelectorAll('.glitch-hover');
+    const ghObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                // Trigger glitch animation
+                e.target.style.animation = 'none';
+                void e.target.offsetWidth; // reflow
+                e.target.classList.add('glitch-trigger');
+                setTimeout(() => e.target.classList.remove('glitch-trigger'), 600);
+            }
+        });
+    }, { threshold: 0.5 });
+    glitchHeaders.forEach(h => ghObs.observe(h));
+
+    /* ─── TOOL CARD GLITCH on hover ─── */
+    document.querySelectorAll('.ti').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.animation = 'toolGlitch .15s steps(2)';
+            setTimeout(() => card.style.animation = '', 150);
+        });
+    });
+
 })();
