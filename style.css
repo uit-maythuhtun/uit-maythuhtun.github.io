@@ -419,11 +419,11 @@ img{display:block;max-width:100%}
     will-change:transform,opacity;contain:strict;
 }
 @keyframes heroGlitchBg{
-    0%,90%,100%{opacity:.5;transform:translate(-50%,-50%)}
-    92%{opacity:.8;transform:translate(-50%,-50%) skewX(-2deg)}
-    94%{opacity:.3;transform:translate(calc(-50% + 5px),-50%) skewX(1deg)}
-    96%{opacity:.7;transform:translate(calc(-50% - 3px),-50%)}
-    98%{opacity:.5;transform:translate(-50%,-50%)}
+    0%,88%,100%{opacity:.5;transform:translate(-50%,-50%)}
+    89%{opacity:.7;transform:translate(-50%,-50%) skewX(-1.5deg)}
+    91%{opacity:.2;transform:translate(calc(-50% + 4px),-50%) skewX(0.8deg)}
+    93%{opacity:.6;transform:translate(calc(-50% - 3px),-50%)}
+    95%{opacity:.5;transform:translate(-50%,-50%)}
 }
 
 /* ── HERO CIRCUIT LINES ── */
@@ -505,7 +505,9 @@ img{display:block;max-width:100%}
     content:'';position:absolute;top:0;left:0;right:0;height:2px;
     background:linear-gradient(90deg,var(--red),var(--teal));
     animation:skPanelGlow 3s ease-in-out infinite;
+    animation-play-state:paused;
 }
+.sk-panel.visible::before{animation-play-state:running}
 @keyframes skPanelGlow{0%,100%{opacity:.3}50%{opacity:.8}}
 .skp-title{
     font-family:var(--ff2);font-size:13px;letter-spacing:4px;color:var(--white);
@@ -639,17 +641,17 @@ img{display:block;max-width:100%}
     font-family:var(--ff2);font-size:9px;letter-spacing:3px;color:var(--red);
     background:rgba(255,70,85,.12);border:1px solid rgba(255,70,85,.25);
     padding:4px 12px;width:fit-content;margin-bottom:10px;
-    animation:tagPulse 3s ease-in-out infinite;
 }
-@keyframes tagPulse{0%,100%{border-color:rgba(255,70,85,.25)}50%{border-color:rgba(255,70,85,.5)}}
+.pf-card:hover .pf-tag{animation:tagPulse 2s ease-in-out infinite}
+@keyframes tagPulse{0%,100%{border-color:rgba(255,70,85,.25)}50%{border-color:rgba(255,70,85,.6)}}
 .pf-ov h3{font-family:var(--ff2);font-size:16px;letter-spacing:2px;margin-bottom:4px}
 .pf-ov p{font-size:13px;color:var(--gray)}
 .pf-ov .pf-mission{
     font-family:var(--ff2);font-size:9px;letter-spacing:3px;color:var(--teal);
     margin-top:10px;opacity:.8;
-    animation:missionBlink 4s steps(1) infinite;
 }
-@keyframes missionBlink{0%,88%,92%,100%{opacity:.8}90%{opacity:0}}
+.pf-card:hover .pf-mission{animation:missionBlink 3s steps(1) infinite}
+@keyframes missionBlink{0%,85%,92%,100%{opacity:.8}88%{opacity:0}}
 
 /* ── Stat bar inside card ── */
 .pf-stat{display:flex;align-items:center;gap:10px;margin-top:8px}
@@ -678,9 +680,9 @@ img{display:block;max-width:100%}
 .pf-hud-hex{
     width:7px;height:7px;background:var(--red);
     clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-    animation:hudHexPulse 2s infinite;
 }
-@keyframes hudHexPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}
+.pf-card:hover .pf-hud-hex{animation:hudHexPulse 1.5s infinite}
+@keyframes hudHexPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
 .pf-hud-ping{
     width:5px;height:5px;border-radius:50%;background:var(--teal);
     animation:dotPulse 1.5s infinite;margin-left:4px;
@@ -703,7 +705,7 @@ img{display:block;max-width:100%}
     background:rgba(255,70,85,.05);
     animation:floatH 3s ease-in-out infinite;
 }
-.pf-sc h3{font-family:var(--ff2);font-size:14px;letter-spacing:4px;margin-bottom:6px;color:var(--white)}
+.pf-sc h3{font-family:var(--ff2);font-size:14px;letter-spacing:4px;margin-bottom:6px;color:var(--white);text-transform:uppercase}
 .pf-sc p{font-size:13px;color:var(--gray);max-width:280px;margin:0 auto}
 .pf-dots{display:flex;justify-content:center;gap:6px;margin-top:14px}
 .pf-dots span{width:6px;height:6px;background:var(--red);border-radius:50%;animation:dotBounce 1.4s ease-in-out infinite}
@@ -861,7 +863,9 @@ img{display:block;max-width:100%}
     .hn2{font-size:40px}
     .hero-stats{flex-wrap:wrap;gap:16px}
     .hero-desc{font-size:15px;padding:0 10px}
-    .hero-agent{flex-wrap:wrap;justify-content:center}
+    .hero-agent{flex-wrap:wrap;justify-content:center;gap:6px}
+    .ha-pre{opacity:.8;font-size:10px}
+    .ha-name{font-size:20px;letter-spacing:5px}
     .hero-glitch-bg{font-size:50px;opacity:.2;-webkit-text-stroke:1px rgba(255,70,85,.03)}
     .hero-circuit{display:none}
     .tg{grid-template-columns:1fr 1fr}
@@ -902,14 +906,23 @@ img{display:block;max-width:100%}
     .hero-scanline{opacity:.3}
     #navbar{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
     .mob-menu{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-    /* Glitch text - lightweight mobile version using text-shadow */
+    /* Glitch text - mobile version using text-shadow (no pseudo-elements for perf) */
     .glitch::before,.glitch::after{display:none}
-    .glitch{animation:mobileGlitch 4s steps(2) infinite}
+    .glitch{animation:mobileGlitch 3s steps(2) infinite}
     @keyframes mobileGlitch{
-        0%,92%,100%{text-shadow:none}
-        93%{text-shadow:-2px 0 var(--red),2px 0 var(--teal)}
-        95%{text-shadow:1px 0 var(--red),-1px 0 var(--teal)}
-        97%{text-shadow:-1px 0 var(--teal),1px 0 var(--red)}
+        0%,82%,100%{text-shadow:none;transform:none}
+        83%{text-shadow:-2px 0 var(--red),2px 0 var(--teal);transform:translate(-1px,0)}
+        86%{text-shadow:2px 0 var(--teal),-2px 0 var(--red);transform:translate(1px,0)}
+        89%{text-shadow:-1px 0 var(--red),1px 0 var(--teal);transform:skewX(-2deg)}
+        92%{text-shadow:1px 0 var(--teal),-1px 0 var(--red);transform:skewX(1deg)}
+        95%{text-shadow:-2px 0 var(--red),3px 0 var(--teal);transform:translate(-1px,1px)}
+        98%{text-shadow:none;transform:none}
+    }
+    /* Agent name glow pulse on mobile */
+    .ha-name{animation:mobileGlitch 3s steps(2) infinite,agentGlow 2s ease-in-out infinite}
+    @keyframes agentGlow{
+        0%,100%{text-shadow:0 0 4px rgba(0,212,170,.2)}
+        50%{text-shadow:0 0 12px rgba(0,212,170,.5),0 0 24px rgba(0,212,170,.15)}
     }
     /* Portfolio grid mobile */
     .pf-grid{grid-template-columns:1fr;gap:16px}
@@ -937,7 +950,7 @@ img{display:block;max-width:100%}
     .hs-sep{height:28px}
     .hero-glitch-bg{font-size:40px}
     .hero-desc{font-size:14px}
-    .ha-name{font-size:16px}
+    .ha-name{font-size:18px;letter-spacing:4px}
     .ha-pre{font-size:9px}
     .ht-text{font-size:9px;letter-spacing:3px}
     .at-hi{font-size:18px}
