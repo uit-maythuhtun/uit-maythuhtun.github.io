@@ -80,7 +80,7 @@
         cursorLoop();
 
         // Hover effect on interactive elements
-        const hovers = document.querySelectorAll('a, button, .pf-card, .ti, .abc, .soc-row');
+        const hovers = document.querySelectorAll('a, button, .pf-card, .ti, .abc, .soc-row, .pf-f');
         hovers.forEach(el => {
             el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
             el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
@@ -400,10 +400,11 @@
 
     /* ─── RANDOM GLITCH LINES (Valorant sci-fi) ─── */
     const glitchContainer = document.getElementById('glitchLines');
-    if (glitchContainer && window.innerWidth > 768) {
+    const isMobileGlitch = window.innerWidth <= 768;
+    if (glitchContainer) {
         // Pre-create a pool of reusable glitch line elements
         const glitchPool = [];
-        const GLITCH_POOL_SIZE = 4;
+        const GLITCH_POOL_SIZE = isMobileGlitch ? 2 : 4;
         for (let i = 0; i < GLITCH_POOL_SIZE; i++) {
             const line = document.createElement('div');
             line.className = 'gl-line';
@@ -434,8 +435,9 @@
             for (let i = 0; i < count; i++) {
                 setTimeout(spawnGlitchLine, i * 30);
             }
-            // Next burst in 2-6 seconds
-            setTimeout(glitchLoop, Math.random() * 4000 + 2000);
+            // Next burst: slower on mobile for perf
+            const delay = isMobileGlitch ? (Math.random() * 6000 + 4000) : (Math.random() * 4000 + 2000);
+            setTimeout(glitchLoop, delay);
         }
         setTimeout(glitchLoop, 3000);
     }
@@ -462,5 +464,57 @@
             setTimeout(() => card.style.animation = '', 150);
         });
     });
+
+    /* ─── PORTFOLIO FILTER ─── */
+    const filterBtns = document.querySelectorAll('.pf-f');
+    const pfItems = document.querySelectorAll('.pf-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cat = btn.dataset.filter;
+
+            pfItems.forEach((item, i) => {
+                const itemCat = item.dataset.cat;
+                const shouldShow = cat === 'all' || itemCat === cat || !itemCat;
+                // Stagger the transition
+                item.style.transitionDelay = (i * 60) + 'ms';
+                if (shouldShow) {
+                    item.classList.remove('pf-hidden');
+                } else {
+                    item.classList.add('pf-hidden');
+                }
+            });
+
+            // Reset delays after animation
+            setTimeout(() => {
+                pfItems.forEach(item => item.style.transitionDelay = '');
+            }, 400);
+        });
+    });
+
+    /* ─── PORTFOLIO CARD TILT (desktop) ─── */
+    if (window.innerWidth > 768) {
+        document.querySelectorAll('.pf-card').forEach(card => {
+            let pfTilt = false;
+            card.addEventListener('mousemove', (e) => {
+                if (pfTilt) return;
+                pfTilt = true;
+                requestAnimationFrame(() => {
+                    const r = card.getBoundingClientRect();
+                    const px = (e.clientX - r.left) / r.width - 0.5;
+                    const py = (e.clientY - r.top) / r.height - 0.5;
+                    card.style.transform = `perspective(800px) rotateY(${px * 4}deg) rotateX(${-py * 4}deg) translateZ(0)`;
+                    pfTilt = false;
+                });
+            }, { passive: true });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.transition = 'transform .4s ease';
+                setTimeout(() => card.style.transition = '', 400);
+            });
+        });
+    }
 
 })();
