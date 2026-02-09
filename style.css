@@ -893,7 +893,6 @@ img{display:block;max-width:100%}
     .loader-name{font-size:22px;letter-spacing:8px}
     .loader-role{font-size:8px;letter-spacing:4px}
     .loader-progress{width:200px}
-    .scroll-cue{display:none}
     .btn-v{padding:12px 22px;font-size:11px}
     .btn-o{padding:12px 22px;font-size:11px}
     .cursor-ring,.cursor-dot-main{display:none}
@@ -906,24 +905,21 @@ img{display:block;max-width:100%}
     .hero-scanline{opacity:.3}
     #navbar{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
     .mob-menu{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-    /* Glitch text - mobile version using text-shadow (no pseudo-elements for perf) */
-    .glitch::before,.glitch::after{display:none}
-    .glitch{animation:mobileGlitch 3s steps(2) infinite}
-    @keyframes mobileGlitch{
-        0%,82%,100%{text-shadow:none;transform:none}
-        83%{text-shadow:-2px 0 var(--red),2px 0 var(--teal);transform:translate(-1px,0)}
-        86%{text-shadow:2px 0 var(--teal),-2px 0 var(--red);transform:translate(1px,0)}
-        89%{text-shadow:-1px 0 var(--red),1px 0 var(--teal);transform:skewX(-2deg)}
-        92%{text-shadow:1px 0 var(--teal),-1px 0 var(--red);transform:skewX(1deg)}
-        95%{text-shadow:-2px 0 var(--red),3px 0 var(--teal);transform:translate(-1px,1px)}
-        98%{text-shadow:none;transform:none}
+    /* Section header glitch — text-shadow version for mobile (no pseudo-elements) */
+    .glitch-hover::before,.glitch-hover::after{display:none}
+    .glitch-hover.glitch-trigger{animation:mobileHeaderGlitch .5s steps(3) 1}
+    @keyframes mobileHeaderGlitch{
+        0%,100%{text-shadow:none;transform:none}
+        15%{text-shadow:-3px 0 var(--red),3px 0 var(--teal);transform:translate(-2px,0)}
+        30%{text-shadow:2px 0 var(--teal),-2px 0 var(--red);transform:translate(1px,1px) skewX(-1deg)}
+        50%{text-shadow:-2px 0 var(--red),2px 0 var(--teal);transform:translate(-1px,-1px)}
+        70%{text-shadow:3px 0 var(--teal),-1px 0 var(--red);transform:skewX(1deg)}
+        85%{text-shadow:-1px 0 var(--red),1px 0 var(--teal);transform:translate(1px,0)}
     }
-    /* Agent name glow pulse on mobile */
-    .ha-name{animation:mobileGlitch 3s steps(2) infinite,agentGlow 2s ease-in-out infinite}
-    @keyframes agentGlow{
-        0%,100%{text-shadow:0 0 4px rgba(0,212,170,.2)}
-        50%{text-shadow:0 0 12px rgba(0,212,170,.5),0 0 24px rgba(0,212,170,.15)}
-    }
+    /* Re-enable hero circuits — just 2 tiny gradient lines */
+    .hero-circuit{display:block;opacity:.04}
+    /* Re-enable scroll cue */
+    .scroll-cue{display:flex}
     /* Portfolio grid mobile */
     .pf-grid{grid-template-columns:1fr;gap:16px}
     .pf-big{grid-column:auto;grid-row:auto}
@@ -931,6 +927,13 @@ img{display:block;max-width:100%}
     .pf-hud{opacity:.6}
     .pf-stat{display:none}
     .pf-card::before{display:none}
+    /* Active/focus state for tap on mobile cards */
+    .pf-card:active .pf-img{transform:scale(1.03)}
+    .ti:active{border-color:rgba(255,70,85,.35);transform:translateY(-2px)}
+    .ti:active::before{opacity:1}
+    .abc:active{border-color:rgba(255,70,85,.3);transform:translateY(-3px)}
+    .abc:active::before{transform:scaleX(1)}
+    .soc-row:active{border-color:rgba(255,70,85,.3);transform:translateX(4px)}
     .pf-f{cursor:pointer}
 }
 @media(max-width:480px){
@@ -985,4 +988,6 @@ img{display:block;max-width:100%}
     .sec-hdr{margin-bottom:28px}
     .noise-overlay{display:none}
     .hero-glitch-bg{display:none}
+    .hero-circuit{display:none}
+    .scroll-cue{display:none}
 }

@@ -444,25 +444,32 @@
 
     /* ─── SECTION HEADER GLITCH on scroll into view ─── */
     const glitchHeaders = document.querySelectorAll('.glitch-hover');
+    const isMobileView = window.innerWidth <= 768;
     const ghObs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) {
-                // Trigger glitch animation
-                e.target.style.animation = 'none';
-                void e.target.offsetWidth; // reflow
+                e.target.classList.remove('glitch-trigger');
+                void e.target.offsetWidth; // reflow to restart
                 e.target.classList.add('glitch-trigger');
                 setTimeout(() => e.target.classList.remove('glitch-trigger'), 600);
+                // On desktop, only trigger once; on mobile, keep retriggering on scroll
+                if (!isMobileView) ghObs.unobserve(e.target);
             }
         });
     }, { threshold: 0.5 });
     glitchHeaders.forEach(h => ghObs.observe(h));
 
-    /* ─── TOOL CARD GLITCH on hover ─── */
+    /* ─── TOOL CARD GLITCH on hover/tap ─── */
     document.querySelectorAll('.ti').forEach(card => {
         card.addEventListener('mouseenter', () => {
             card.style.animation = 'toolGlitch .15s steps(2)';
             setTimeout(() => card.style.animation = '', 150);
         });
+        // Touch support for mobile
+        card.addEventListener('touchstart', () => {
+            card.style.animation = 'toolGlitch .15s steps(2)';
+            setTimeout(() => card.style.animation = '', 150);
+        }, { passive: true });
     });
 
     /* ─── PORTFOLIO FILTER ─── */
