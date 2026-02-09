@@ -56,20 +56,25 @@
     const ring = document.getElementById('cursorRing');
     const dot = document.getElementById('cursorDot');
     let mx = 0, my = 0, rx = 0, ry = 0;
+    let cursorRAF = false;
 
     if (ring && dot && window.innerWidth > 768) {
         document.addEventListener('mousemove', (e) => {
             mx = e.clientX;
             my = e.clientY;
-            dot.style.left = mx + 'px';
-            dot.style.top = my + 'px';
-        });
+            if (!cursorRAF) {
+                cursorRAF = true;
+                requestAnimationFrame(() => {
+                    dot.style.transform = `translate3d(${mx - 2.5}px, ${my - 2.5}px, 0)`;
+                    cursorRAF = false;
+                });
+            }
+        }, { passive: true });
 
         function cursorLoop() {
             rx += (mx - rx) * 0.15;
             ry += (my - ry) * 0.15;
-            ring.style.left = rx + 'px';
-            ring.style.top = ry + 'px';
+            ring.style.transform = `translate3d(${rx - 18}px, ${ry - 18}px, 0)`;
             requestAnimationFrame(cursorLoop);
         }
         cursorLoop();
@@ -84,9 +89,11 @@
 
     /* ─── PARTICLE CANVAS ─── */
     const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas ? canvas.getContext('2d') : null;
+    const ctx = canvas ? canvas.getContext('2d', { alpha: true }) : null;
     let particles = [];
-    const PARTICLE_COUNT = 50;
+    const isMobile = window.innerWidth <= 768;
+    const PARTICLE_COUNT = isMobile ? 0 : Math.min(30, Math.floor(window.innerWidth / 50));
+    let particlesRunning = true;
 
     function resizeCanvas() {
         if (!canvas) return;
@@ -96,6 +103,7 @@
 
     function createParticles() {
         particles = [];
+        if (isMobile) return;
         for (let i = 0; i < PARTICLE_COUNT; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
@@ -110,9 +118,11 @@
     }
 
     function drawParticles() {
-        if (!ctx) return;
+        if (!ctx || !particlesRunning) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
+        const len = particles.length;
+        for (let i = 0; i < len; i++) {
+            const p = particles[i];
             p.x += p.vx;
             p.y += p.vy;
             if (p.x < 0) p.x = canvas.width;
@@ -124,20 +134,24 @@
             ctx.fillStyle = p.color;
             ctx.globalAlpha = p.alpha;
             ctx.fill();
-        });
+        }
         ctx.globalAlpha = 1;
 
-        // Draw connections
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
+        // Draw connections with optimized distance check
+        const connDist = 100;
+        const connDistSq = connDist * connDist;
+        for (let i = 0; i < len; i++) {
+            for (let j = i + 1; j < len; j++) {
                 const dx = particles[i].x - particles[j].x;
+                if (dx > connDist || dx < -connDist) continue;
                 const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
+                if (dy > connDist || dy < -connDist) continue;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < connDistSq) {
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = 'rgba(255,70,85,' + (0.03 * (1 - dist / 120)) + ')';
+                    ctx.strokeStyle = 'rgba(255,70,85,' + (0.03 * (1 - Math.sqrt(distSq) / connDist)) + ')';
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -146,19 +160,34 @@
         requestAnimationFrame(drawParticles);
     }
 
-    if (canvas) {
+    if (canvas && !isMobile) {
         resizeCanvas();
         createParticles();
         drawParticles();
-        window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => { resizeCanvas(); createParticles(); }, 250);
+        }, { passive: true });
     }
+
+    // Pause particles when tab is hidden
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            particlesRunning = false;
+        } else {
+            particlesRunning = true;
+            if (canvas && !isMobile) drawParticles();
+        }
+    });
 
     /* ─── NAVBAR ─── */
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.sec, .hero');
+    let scrollTicking = false;
 
-    window.addEventListener('scroll', () => {
+    function onScroll() {
         const sy = window.scrollY;
         // Scrolled class
         if (navbar) navbar.classList.toggle('scrolled', sy > 60);
@@ -174,7 +203,15 @@
         navLinks.forEach(l => {
             l.classList.toggle('active', l.getAttribute('href') === '#' + current);
         });
-    });
+        scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            scrollTicking = true;
+            requestAnimationFrame(onScroll);
+        }
+    }, { passive: true });
 
     /* ─── BURGER / MOBILE MENU ─── */
     const burger = document.getElementById('burger');
@@ -313,27 +350,38 @@
     if (bttBtn) bttBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     /* ─── PARALLAX on Hero Glows ─── */
+    let parallaxTicking = false;
     window.addEventListener('mousemove', (e) => {
-        if (window.innerWidth < 768) return;
-        const cx = (e.clientX / window.innerWidth - 0.5) * 2;
-        const cy = (e.clientY / window.innerHeight - 0.5) * 2;
-        const g1 = document.querySelector('.hero-glow.g1');
-        const g2 = document.querySelector('.hero-glow.g2');
-        if (g1) g1.style.transform = `translate(${cx * 20}px, ${cy * 15}px)`;
-        if (g2) g2.style.transform = `translate(${cx * -15}px, ${cy * -20}px)`;
-    });
+        if (window.innerWidth < 768 || parallaxTicking) return;
+        parallaxTicking = true;
+        requestAnimationFrame(() => {
+            const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+            const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+            const g1 = document.querySelector('.hero-glow.g1');
+            const g2 = document.querySelector('.hero-glow.g2');
+            if (g1) g1.style.transform = `translate3d(${cx * 20}px, ${cy * 15}px, 0)`;
+            if (g2) g2.style.transform = `translate3d(${cx * -15}px, ${cy * -20}px, 0)`;
+            parallaxTicking = false;
+        });
+    }, { passive: true });
 
     /* ─── TILT on Hero Frame ─── */
     const heroFrame = document.querySelector('.hero-frame');
     if (heroFrame && window.innerWidth > 768) {
+        let tiltTicking = false;
         heroFrame.addEventListener('mousemove', (e) => {
-            const r = heroFrame.getBoundingClientRect();
-            const px = (e.clientX - r.left) / r.width - 0.5;
-            const py = (e.clientY - r.top) / r.height - 0.5;
-            heroFrame.style.transform = `perspective(600px) rotateY(${px * 8}deg) rotateX(${-py * 8}deg)`;
-        });
+            if (tiltTicking) return;
+            tiltTicking = true;
+            requestAnimationFrame(() => {
+                const r = heroFrame.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width - 0.5;
+                const py = (e.clientY - r.top) / r.height - 0.5;
+                heroFrame.style.transform = `perspective(600px) rotateY(${px * 8}deg) rotateX(${-py * 8}deg) translateZ(0)`;
+                tiltTicking = false;
+            });
+        }, { passive: true });
         heroFrame.addEventListener('mouseleave', () => {
-            heroFrame.style.transform = 'perspective(600px) rotateY(0) rotateX(0)';
+            heroFrame.style.transform = 'perspective(600px) rotateY(0) rotateX(0) translateZ(0)';
             heroFrame.style.transition = 'transform .5s ease';
             setTimeout(() => heroFrame.style.transition = '', 500);
         });
@@ -352,18 +400,32 @@
 
     /* ─── RANDOM GLITCH LINES (Valorant sci-fi) ─── */
     const glitchContainer = document.getElementById('glitchLines');
-    if (glitchContainer) {
-        function spawnGlitchLine() {
+    if (glitchContainer && window.innerWidth > 768) {
+        // Pre-create a pool of reusable glitch line elements
+        const glitchPool = [];
+        const GLITCH_POOL_SIZE = 4;
+        for (let i = 0; i < GLITCH_POOL_SIZE; i++) {
             const line = document.createElement('div');
             line.className = 'gl-line';
+            line.style.display = 'none';
+            glitchContainer.appendChild(line);
+            glitchPool.push(line);
+        }
+        let glitchIdx = 0;
+
+        function spawnGlitchLine() {
+            const line = glitchPool[glitchIdx % GLITCH_POOL_SIZE];
+            glitchIdx++;
+            line.style.display = '';
             line.style.top = Math.random() * 100 + '%';
             line.style.height = (Math.random() * 2 + 0.5) + 'px';
             line.style.animationDuration = (Math.random() * 0.15 + 0.05) + 's';
-            if (Math.random() > 0.6) {
-                line.style.background = 'rgba(0,212,170,.1)';
-            }
-            glitchContainer.appendChild(line);
-            setTimeout(() => line.remove(), 300);
+            line.style.background = Math.random() > 0.6 ? 'rgba(0,212,170,.1)' : 'rgba(255,70,85,.12)';
+            // Force reflow to restart animation
+            line.style.animation = 'none';
+            void line.offsetWidth;
+            line.style.animation = '';
+            setTimeout(() => { line.style.display = 'none'; }, 300);
         }
 
         function glitchLoop() {
