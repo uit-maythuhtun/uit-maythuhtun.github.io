@@ -866,8 +866,7 @@ img{display:block;max-width:100%}
     .hero-agent{flex-wrap:wrap;justify-content:center;gap:6px}
     .ha-pre{opacity:.8;font-size:10px}
     .ha-name{font-size:20px;letter-spacing:5px}
-    .hero-glitch-bg{font-size:50px;opacity:.2;-webkit-text-stroke:1px rgba(255,70,85,.03)}
-    .hero-circuit{display:none}
+    .hero-glitch-bg{font-size:50px}
     .tg{grid-template-columns:1fr 1fr}
     .ti::after{display:none}
     .ft{padding:30px 16px}
@@ -898,28 +897,15 @@ img{display:block;max-width:100%}
     .cursor-ring,.cursor-dot-main{display:none}
     body{cursor:auto}
     .btn-v,.btn-o,.pf-exp,.lb-x,.btt,.pf-card,.soc-row,.burger,.mob-close,.ti,.abc,.mob-link,.pf-f{cursor:pointer}
-    /* Lightweight mobile effects — keep the Valorant vibe */
-    .noise-overlay{opacity:.02;background-size:200px}
-    .loader-scanlines{opacity:.3}
-    #particleCanvas{display:none}
-    .hero-scanline{opacity:.3}
-    #navbar{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-    .mob-menu{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-    /* Section header glitch — text-shadow version for mobile (no pseudo-elements) */
-    .glitch-hover::before,.glitch-hover::after{display:none}
-    .glitch-hover.glitch-trigger{animation:mobileHeaderGlitch .5s steps(3) 1}
-    @keyframes mobileHeaderGlitch{
-        0%,100%{text-shadow:none;transform:none}
-        15%{text-shadow:-3px 0 var(--red),3px 0 var(--teal);transform:translate(-2px,0)}
-        30%{text-shadow:2px 0 var(--teal),-2px 0 var(--red);transform:translate(1px,1px) skewX(-1deg)}
-        50%{text-shadow:-2px 0 var(--red),2px 0 var(--teal);transform:translate(-1px,-1px)}
-        70%{text-shadow:3px 0 var(--teal),-1px 0 var(--red);transform:skewX(1deg)}
-        85%{text-shadow:-1px 0 var(--red),1px 0 var(--teal);transform:translate(1px,0)}
-    }
-    /* Re-enable hero circuits — just 2 tiny gradient lines */
-    .hero-circuit{display:block;opacity:.04}
-    /* Re-enable scroll cue */
-    .scroll-cue{display:flex}
+    /* Keep ALL desktop effects on mobile — just like the original design */
+    /* Full glitch ::before/::after on AGENT name — runs exactly like desktop */
+    /* Full glitch-hover ::before/::after on section headers — runs exactly like desktop */
+    /* No downgrades. The original early commits had everything enabled and it was fine. */
+    .noise-overlay{opacity:.03;background-size:200px}
+    .loader-scanlines{opacity:.4}
+    .hero-scanline{opacity:.4}
+    #navbar{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+    .mob-menu{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
     /* Portfolio grid mobile */
     .pf-grid{grid-template-columns:1fr;gap:16px}
     .pf-big{grid-column:auto;grid-row:auto}
@@ -986,8 +972,6 @@ img{display:block;max-width:100%}
     .sh-title{font-size:20px;letter-spacing:1px}
     .sh-num{font-size:10px;letter-spacing:2px}
     .sec-hdr{margin-bottom:28px}
-    .noise-overlay{display:none}
-    .hero-glitch-bg{display:none}
-    .hero-circuit{display:none}
+    .hero-glitch-bg{font-size:35px}
     .scroll-cue{display:none}
 }

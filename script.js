@@ -92,7 +92,7 @@
     const ctx = canvas ? canvas.getContext('2d', { alpha: true }) : null;
     let particles = [];
     const isMobile = window.innerWidth <= 768;
-    const PARTICLE_COUNT = isMobile ? 0 : Math.min(30, Math.floor(window.innerWidth / 50));
+    const PARTICLE_COUNT = isMobile ? Math.min(12, Math.floor(window.innerWidth / 40)) : Math.min(30, Math.floor(window.innerWidth / 50));
     let particlesRunning = true;
 
     function resizeCanvas() {
@@ -103,7 +103,6 @@
 
     function createParticles() {
         particles = [];
-        if (isMobile) return;
         for (let i = 0; i < PARTICLE_COUNT; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
@@ -160,7 +159,7 @@
         requestAnimationFrame(drawParticles);
     }
 
-    if (canvas && !isMobile) {
+    if (canvas) {
         resizeCanvas();
         createParticles();
         drawParticles();
@@ -177,7 +176,7 @@
             particlesRunning = false;
         } else {
             particlesRunning = true;
-            if (canvas && !isMobile) drawParticles();
+            if (canvas) drawParticles();
         }
     });
 
