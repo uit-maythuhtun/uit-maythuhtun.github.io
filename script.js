@@ -179,7 +179,14 @@
     /* ─── BURGER / MOBILE MENU ─── */
     const burger = document.getElementById('burger');
     const mobMenu = document.getElementById('mobMenu');
+    const mobClose = document.getElementById('mobClose');
     const mobLinks = document.querySelectorAll('.mob-link');
+
+    function closeMobMenu() {
+        burger.classList.remove('open');
+        mobMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    }
 
     if (burger && mobMenu) {
         burger.addEventListener('click', () => {
@@ -187,11 +194,8 @@
             mobMenu.classList.toggle('open');
             document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
         });
-        mobLinks.forEach(l => l.addEventListener('click', () => {
-            burger.classList.remove('open');
-            mobMenu.classList.remove('open');
-            document.body.style.overflow = '';
-        }));
+        if (mobClose) mobClose.addEventListener('click', closeMobMenu);
+        mobLinks.forEach(l => l.addEventListener('click', closeMobMenu));
     }
 
     /* ─── SCROLL REVEAL ─── */

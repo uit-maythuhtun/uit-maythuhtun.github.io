@@ -16,7 +16,7 @@
     --ease2:cubic-bezier(.65,0,.35,1);
 }
 
-html{scroll-behavior:smooth;scroll-padding-top:80px}
+html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:hidden}
 body{font-family:var(--ff);background:var(--darker);color:var(--white);overflow-x:hidden;cursor:none;line-height:1.6;font-size:16px}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -159,10 +159,21 @@ img{display:block;max-width:100%}
     opacity:0;visibility:hidden;transition:all .4s var(--ease);
 }
 .mob-menu.open{opacity:1;visibility:visible}
+.mob-close{
+    position:absolute;top:18px;right:20px;z-index:1060;
+    width:44px;height:44px;
+    background:rgba(255,70,85,.08);border:1px solid rgba(255,70,85,.25);
+    color:var(--red);font-size:20px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:all .3s;
+    clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+}
+.mob-close:hover{background:var(--red);color:#fff}
 .mob-links{list-style:none;text-align:center;display:flex;flex-direction:column;gap:24px}
 .mob-link{
     font-family:var(--ff2);font-size:28px;font-weight:600;letter-spacing:4px;
     color:var(--gray);transition:all .3s;display:flex;align-items:center;gap:14px;
+    justify-content:center;
 }
 .mob-link:hover{color:var(--red);transform:translateX(8px)}
 .ml-num{font-size:12px;color:var(--red);opacity:.4}
@@ -172,7 +183,7 @@ img{display:block;max-width:100%}
     position:relative;min-height:100vh;display:flex;align-items:center;
     padding:120px 40px 60px;overflow:hidden;
 }
-.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
 .hero-grid{
     position:absolute;inset:0;
     background-image:
@@ -341,7 +352,7 @@ img{display:block;max-width:100%}
 .scroll-cue span{font-family:var(--ff2);font-size:8px;letter-spacing:4px;color:var(--gray);opacity:.5}
 
 /* ═══ SECTIONS COMMON ═══ */
-.sec{position:relative;padding:100px 40px;overflow:hidden}
+.sec{position:relative;padding:100px 40px;overflow:hidden;max-width:100vw}
 .sec-alt{background:var(--darkest)}
 .sec-bg-txt{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -394,6 +405,7 @@ img{display:block;max-width:100%}
     color:transparent;-webkit-text-stroke:1px rgba(255,70,85,.04);
     pointer-events:none;user-select:none;z-index:0;white-space:nowrap;
     animation:heroGlitchBg 8s ease-in-out infinite;
+    max-width:100vw;overflow:hidden;
 }
 @keyframes heroGlitchBg{
     0%,90%,100%{opacity:.5;transform:translate(-50%,-50%)}
@@ -734,28 +746,91 @@ img{display:block;max-width:100%}
     .pf-grid{grid-template-columns:1fr}
     .pf-big{grid-row:auto}
     .ct-grid{grid-template-columns:1fr}
-    .ab-cards{grid-template-columns:1fr}
+    .ab-cards{grid-template-columns:repeat(3,1fr)}
+    .hero-glitch-bg{font-size:80px}
 }
 @media(max-width:768px){
     .nav-links{display:none}
     .burger{display:flex}
-    .hero{padding:100px 20px 60px}
-    .sec{padding:70px 20px}
-    #navbar{padding:14px 20px}
+    .hero{padding:100px 16px 60px}
+    .sec{padding:60px 16px}
+    #navbar{padding:12px 16px}
     .hero-frame{width:200px;height:260px}
     .hn1{font-size:28px}
     .hn2{font-size:40px}
     .hero-stats{flex-wrap:wrap;gap:16px}
+    .hero-desc{font-size:15px;padding:0 10px}
+    .hero-agent{flex-wrap:wrap;justify-content:center}
+    .hero-glitch-bg{font-size:60px;opacity:.3}
+    .hero-circuit{display:none}
     .tg{grid-template-columns:1fr}
     .ti::after{display:none}
+    .ft{padding:30px 16px}
+    .ft-top{flex-direction:column;gap:16px;align-items:center}
     .ft-bot{flex-direction:column;gap:4px;text-align:center}
     .ab-cards{grid-template-columns:1fr}
+    .about-card{max-width:320px;margin:0 auto}
+    .ct-left h3{font-size:18px}
+    .ct-form{padding:24px 16px}
+    .soc-row{padding:12px 14px}
+    .soc-ic{width:34px;height:34px;font-size:14px}
+    .sk-panel{padding:20px 16px}
+    .mob-link{font-size:22px;letter-spacing:3px;gap:10px}
+    .sec-bg-txt{font-size:60px;letter-spacing:10px}
+    .sh-title{font-size:24px;letter-spacing:2px}
+    .pf-card{min-height:220px}
+    .loader-name{font-size:22px;letter-spacing:8px}
+    .loader-role{font-size:8px;letter-spacing:4px}
+    .loader-progress{width:200px}
+    .scroll-cue{display:none}
+    .btn-v{padding:12px 22px;font-size:11px}
+    .btn-o{padding:12px 22px;font-size:11px}
     .cursor-ring,.cursor-dot-main{display:none}
     body{cursor:auto}
-    .btn-v,.btn-o,.pf-exp,.lb-x,.btt,.pf-card,.soc-row,.burger{cursor:pointer}
+    .btn-v,.btn-o,.pf-exp,.lb-x,.btt,.pf-card,.soc-row,.burger,.mob-close,.ti,.abc,.mob-link{cursor:pointer}
+    .noise-overlay{opacity:.02}
 }
 @media(max-width:480px){
-    .hero-frame{width:180px;height:230px}
-    .hero-btns{flex-direction:column;align-items:center}
-    .btn-v,.btn-o{width:100%;justify-content:center}
+    .hero{padding:90px 12px 50px}
+    .sec{padding:50px 12px}
+    #navbar{padding:10px 12px}
+    .hero-frame{width:170px;height:220px}
+    .hf-badge{padding:4px 8px;font-size:8px}
+    .hf-hud-top,.hf-hud-bot{font-size:7px}
+    .hn1{font-size:24px}
+    .hn2{font-size:34px}
+    .hero-btns{flex-direction:column;align-items:stretch}
+    .btn-v,.btn-o{width:100%;justify-content:center;text-align:center}
+    .hero-stats{gap:12px}
+    .hs-num{font-size:22px}
+    .hs-label{font-size:8px;letter-spacing:2px}
+    .hs-sep{height:28px}
+    .hero-glitch-bg{font-size:45px}
+    .hero-desc{font-size:14px}
+    .ha-name{font-size:16px}
+    .ha-pre{font-size:9px}
+    .ht-text{font-size:9px;letter-spacing:3px}
+    .at-hi{font-size:18px}
+    .about-txt-col p{font-size:14px}
+    .skp-title{font-size:11px;letter-spacing:2px}
+    .skn{font-size:10px;letter-spacing:1px}
+    .skp{font-size:9px}
+    .ti{padding:12px 14px}
+    .ti-logo{width:30px;height:30px}
+    .ti span{font-size:10px;letter-spacing:1px}
+    .ct-form{padding:20px 14px}
+    .cf-grp label{font-size:9px}
+    .cf-grp input,.cf-grp textarea{font-size:14px}
+    .mob-link{font-size:20px;letter-spacing:2px}
+    .mob-close{top:14px;right:14px;width:40px;height:40px;font-size:18px}
+    .pf-ov{padding:16px}
+    .pf-ov h3{font-size:14px}
+    .lb-img{max-width:95vw;max-height:80vh}
+    .lb-x{top:12px;right:12px;width:36px;height:36px}
+    .btt{bottom:16px;right:16px;width:38px;height:38px}
+    .ft{padding:24px 12px}
+    .ft-soc a{width:30px;height:30px;font-size:12px}
+    .sec-bg-txt{font-size:40px;letter-spacing:6px}
+    .sh-title{font-size:20px;letter-spacing:1px}
+    .sh-num{font-size:10px;letter-spacing:2px}
 }
