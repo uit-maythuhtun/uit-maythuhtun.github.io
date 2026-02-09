@@ -6,602 +6,297 @@
     <title>Su Nandar Htet | Suzie — Creative Graphics Designer</title>
     <meta name="description" content="Portfolio of Su Nandar Htet (Suzie) — Creative Graphics Designer, Multimedia Technology & Animation student at Mae Fah Luang University. Valorant enthusiast & gamer.">
     <meta name="author" content="Su Nandar Htet">
-    <meta name="keywords" content="Su Nandar Htet, Suzie, graphic designer, portfolio, Valorant, multimedia, animation, Mae Fah Luang University, creative designer, Myanmar">
+    <meta name="keywords" content="Su Nandar Htet, Suzie, graphic designer, portfolio, Valorant, multimedia, animation, Mae Fah Luang University, creative designer">
     <meta name="theme-color" content="#ff4655">
 
     <!-- Open Graph / Facebook / Messenger -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sunandarhtet.me/">
-    <meta property="og:title" content="Su Nandar Htet (Suzie) — Creative Graphics Designer">
+    <meta property="og:title" content="Su Nandar Htet (Suzie) — Creative Graphics Designer 🎮">
     <meta property="og:description" content="🎮 Creative Graphics Designer & Valorant Gamer | Multimedia Technology & Animation Student at Mae Fah Luang University. Check out my portfolio!">
     <meta property="og:image" content="https://sunandarhtet.me/og-image.png">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Su Nandar Htet - Suzie | Creative Graphics Designer Portfolio">
-    <meta property="og:site_name" content="Suzie — Portfolio">
+    <meta property="og:site_name" content="Suzie — Creative Designer Portfolio">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://sunandarhtet.me/">
-    <meta name="twitter:title" content="Su Nandar Htet (Suzie) — Creative Graphics Designer">
+    <meta name="twitter:title" content="Su Nandar Htet (Suzie) — Creative Graphics Designer 🎮">
     <meta name="twitter:description" content="🎮 Creative Graphics Designer & Valorant Gamer | Multimedia Technology & Animation Student at Mae Fah Luang University.">
     <meta name="twitter:image" content="https://sunandarhtet.me/og-image.png">
-    <meta name="twitter:image:alt" content="Su Nandar Htet - Suzie | Creative Graphics Designer Portfolio">
 
-    <!-- Telegram / WhatsApp / Instagram (uses OG tags above, these reinforce) -->
+    <!-- Schema.org / WhatsApp / Telegram -->
     <meta itemprop="name" content="Su Nandar Htet (Suzie) — Creative Graphics Designer">
     <meta itemprop="description" content="🎮 Creative Graphics Designer & Valorant Gamer | Multimedia Technology & Animation Student at Mae Fah Luang University.">
     <meta itemprop="image" content="https://sunandarhtet.me/og-image.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="shortcut icon" href="favicon.ico">
-
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://sunandarhtet.me/">
 
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tungsten:wght@400;700&family=DIN+Next+W1G:wght@400;700&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <!-- Valorant-style Loading Screen -->
+    <!-- ═══ VALORANT LOADING SCREEN ═══ -->
     <div id="loader">
-        <div class="loader-bg-grid"></div>
+        <div class="loader-grid-bg"></div>
+        <div class="loader-vignette"></div>
+        <div class="loader-scanlines"></div>
         <div class="loader-content">
-            <div class="loader-logo">
-                <div class="loader-hex-container">
-                    <svg class="val-logo" viewBox="0 0 120 120" width="100" height="100">
-                        <defs>
-                            <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#ff4655"/>
-                                <stop offset="100%" style="stop-color:#00d4aa"/>
-                            </linearGradient>
-                        </defs>
-                        <polygon points="60,5 110,30 110,85 60,110 10,85 10,30" fill="none" stroke="url(#hexGrad)" stroke-width="1.5" class="hex-spin"/>
-                        <polygon points="60,20 95,38 95,78 60,96 25,78 25,38" fill="none" stroke="#ff4655" stroke-width="0.8" class="hex-spin-reverse" opacity="0.5"/>
-                        <!-- Valorant V Shape -->
-                        <path d="M45,40 L60,75 L75,40" fill="none" stroke="#ff4655" stroke-width="3" stroke-linecap="round" class="v-draw"/>
-                    </svg>
-                    <div class="hex-pulse-ring"></div>
+            <div class="loader-emblem">
+                <svg viewBox="0 0 140 140" class="emblem-svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff4655"/>
+                            <stop offset="100%" style="stop-color:#ff6b78"/>
+                        </linearGradient>
+                    </defs>
+                    <polygon points="70,5 130,30 130,105 70,130 10,105 10,30" fill="none" stroke="url(#grad1)" stroke-width="1" class="hex-outer"/>
+                    <polygon points="70,25 110,43 110,93 70,111 30,93 30,43" fill="none" stroke="#ff4655" stroke-width="0.5" class="hex-inner" opacity="0.4"/>
+                    <path d="M50,40 L70,90 L90,40" fill="none" stroke="#ff4655" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="v-path"/>
+                    <circle cx="70" cy="15" r="2" fill="#ff4655" class="hex-dot"/>
+                    <circle cx="70" cy="125" r="2" fill="#00d4aa" class="hex-dot d2"/>
+                </svg>
+                <div class="emblem-ring r1"></div>
+                <div class="emblem-ring r2"></div>
+            </div>
+            <div class="loader-name">SUZIE</div>
+            <div class="loader-role">CREATIVE DESIGNER // MFU</div>
+            <div class="loader-progress">
+                <div class="progress-track">
+                    <div class="progress-fill"></div>
+                    <div class="progress-glow"></div>
                 </div>
-                <span class="loader-text">SUZIE</span>
-                <span class="loader-subtext">CREATIVE DESIGNER</span>
+                <span class="progress-pct">0%</span>
             </div>
-            <div class="loader-bar">
-                <div class="loader-bar-fill"></div>
-                <div class="loader-bar-glow"></div>
-            </div>
-            <div class="loader-status">
-                <span class="loader-dot"></span>
-                <p class="loader-subtitle">INITIALIZING AGENT...</p>
+            <div class="loader-status-row">
+                <span class="status-dot"></span>
+                <span class="status-text">LOADING ASSETS...</span>
             </div>
         </div>
     </div>
 
-    <!-- Cursor Trail Effect -->
-    <div id="cursor-trail"></div>
+    <!-- ═══ CUSTOM CURSOR ═══ -->
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot-main" id="cursorDot"></div>
 
-    <!-- Floating Particles -->
-    <div id="particles-container"></div>
+    <!-- ═══ PARTICLES ═══ -->
+    <canvas id="particleCanvas"></canvas>
 
-    <!-- Navigation -->
+    <!-- ═══ NAVIGATION ═══ -->
     <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <span class="logo-bracket">&lt;</span>
-                <span class="logo-text">SUZIE</span>
-                <span class="logo-bracket">/&gt;</span>
-            </a>
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo"><span class="logo-v">V</span><span class="logo-name">SUZIE</span></a>
             <ul class="nav-links">
-                <li><a href="#home" class="nav-link active" data-text="HOME">HOME</a></li>
-                <li><a href="#about" class="nav-link" data-text="ABOUT">ABOUT</a></li>
-                <li><a href="#skills" class="nav-link" data-text="SKILLS">SKILLS</a></li>
-                <li><a href="#portfolio" class="nav-link" data-text="WORK">WORK</a></li>
-                <li><a href="#contact" class="nav-link" data-text="CONTACT">CONTACT</a></li>
+                <li><a href="#home" class="nav-link active">HOME</a></li>
+                <li><a href="#about" class="nav-link">ABOUT</a></li>
+                <li><a href="#skills" class="nav-link">SKILLS</a></li>
+                <li><a href="#portfolio" class="nav-link">WORK</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
             </ul>
-            <div class="nav-burger" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-links">
-            <li><a href="#home" class="mobile-link">HOME</a></li>
-            <li><a href="#about" class="mobile-link">ABOUT</a></li>
-            <li><a href="#skills" class="mobile-link">SKILLS</a></li>
-            <li><a href="#portfolio" class="mobile-link">WORK</a></li>
-            <li><a href="#contact" class="mobile-link">CONTACT</a></li>
+    <!-- ═══ MOBILE MENU ═══ -->
+    <div class="mob-menu" id="mobMenu">
+        <ul class="mob-links">
+            <li><a href="#home" class="mob-link"><span class="ml-num">01</span>HOME</a></li>
+            <li><a href="#about" class="mob-link"><span class="ml-num">02</span>ABOUT</a></li>
+            <li><a href="#skills" class="mob-link"><span class="ml-num">03</span>SKILLS</a></li>
+            <li><a href="#portfolio" class="mob-link"><span class="ml-num">04</span>WORK</a></li>
+            <li><a href="#contact" class="mob-link"><span class="ml-num">05</span>CONTACT</a></li>
         </ul>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-bg-effects">
-            <div class="grid-overlay"></div>
-            <div class="radial-glow"></div>
-            <div class="scanline"></div>
+    <!-- ═══ HERO ═══ -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="hero-grid"></div>
+            <div class="hero-glow g1"></div>
+            <div class="hero-glow g2"></div>
+            <div class="hero-scanline"></div>
+            <div class="fhex fh1"></div>
+            <div class="fhex fh2"></div>
+            <div class="fhex fh3"></div>
+            <div class="fhex fh4"></div>
         </div>
-
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-tag">
-                    <span class="tag-line"></span>
-                    <span class="tag-text">CREATIVE GRAPHICS DESIGNER</span>
-                    <span class="tag-line"></span>
-                </div>
-                <h1 class="hero-title">
-                    <span class="title-line title-line-1">
-                        <span class="char-reveal">S</span><span class="char-reveal">U</span><span class="char-reveal"> </span><span class="char-reveal">N</span><span class="char-reveal">A</span><span class="char-reveal">N</span><span class="char-reveal">D</span><span class="char-reveal">A</span><span class="char-reveal">R</span>
-                    </span>
-                    <span class="title-line title-line-2">
-                        <span class="char-reveal accent">H</span><span class="char-reveal accent">T</span><span class="char-reveal accent">E</span><span class="char-reveal accent">T</span>
-                    </span>
+        <div class="hero-wrap">
+            <div class="hero-left">
+                <div class="hero-tag"><span class="ht-dash"></span><span class="ht-text">CREATIVE GRAPHICS DESIGNER</span></div>
+                <h1 class="hero-name">
+                    <span class="hn-row hn1">SU NANDAR</span>
+                    <span class="hn-row hn2">HTET</span>
                 </h1>
-                <div class="hero-nickname">
-                    <span class="nick-slash">//</span>
-                    <span class="nick-text">AGENT CODENAME:</span>
-                    <span class="nick-name glitch" data-text="SUZIE">SUZIE</span>
-                </div>
-                <p class="hero-desc">
-                    Multimedia Technology & Animation Student<br>
-                    <span class="desc-accent">Mae Fah Luang University</span>
-                </p>
-                <div class="hero-cta">
-                    <a href="#portfolio" class="btn-primary">
-                        <span class="btn-bg"></span>
-                        <span class="btn-text">VIEW MY WORK</span>
-                        <span class="btn-arrow">→</span>
-                    </a>
-                    <a href="#contact" class="btn-secondary">
-                        <span class="btn-text">CONTACT ME</span>
-                    </a>
+                <div class="hero-agent"><span class="ha-pre">// AGENT:</span><span class="ha-name glitch" data-text="SUZIE">SUZIE</span></div>
+                <p class="hero-desc">Multimedia Technology &amp; Animation Student at <span class="hl">Mae Fah Luang University</span></p>
+                <div class="hero-btns">
+                    <a href="#portfolio" class="btn-v"><span class="bv-bg"></span><span class="bv-txt">VIEW MY WORK</span><i class="fas fa-arrow-right bv-arr"></i></a>
+                    <a href="#contact" class="btn-o">CONTACT ME</a>
                 </div>
                 <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number" data-count="50">0</span><span class="stat-plus">+</span>
-                        <span class="stat-label">DESIGNS</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <span class="stat-number" data-count="30">0</span><span class="stat-plus">+</span>
-                        <span class="stat-label">PROJECTS</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
-                        <span class="stat-label">YEARS EXP</span>
-                    </div>
+                    <div class="hs-item"><span class="hs-num" data-target="50">0</span><span class="hs-plus">+</span><span class="hs-label">DESIGNS</span></div>
+                    <div class="hs-sep"></div>
+                    <div class="hs-item"><span class="hs-num" data-target="30">0</span><span class="hs-plus">+</span><span class="hs-label">PROJECTS</span></div>
+                    <div class="hs-sep"></div>
+                    <div class="hs-item"><span class="hs-num" data-target="3">0</span><span class="hs-plus">+</span><span class="hs-label">YRS EXP</span></div>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="image-frame">
-                    <div class="frame-corner tl"></div>
-                    <div class="frame-corner tr"></div>
-                    <div class="frame-corner bl"></div>
-                    <div class="frame-corner br"></div>
-                    <div class="image-wrapper">
-                        <img src="my_profile_sunanderhtet.jpg" alt="Su Nandar Htet - Suzie" class="profile-img">
-                        <div class="image-overlay"></div>
-                        <div class="image-glitch"></div>
+            <div class="hero-right">
+                <div class="hero-frame">
+                    <div class="hf-corners"><span class="hfc tl"></span><span class="hfc tr"></span><span class="hfc bl"></span><span class="hfc br"></span></div>
+                    <div class="hf-img-wrap">
+                        <img src="my_profile_sunanderhtet.jpg" alt="Su Nandar Htet - Suzie" class="hf-img">
+                        <div class="hf-grad"></div>
+                        <div class="hf-scan"></div>
                     </div>
-                    <div class="agent-badge">
-                        <span class="badge-rank">★</span>
-                        <span class="badge-name">SUZIE</span>
-                        <span class="badge-role">DESIGNER</span>
-                    </div>
+                    <div class="hf-badge"><span class="hfb-star">★</span><span class="hfb-name">SUZIE</span><span class="hfb-role">DESIGNER</span></div>
+                    <div class="hf-hud-top"><span>ID: SZ-001</span><span class="hud-live"></span><span>ONLINE</span></div>
+                    <div class="hf-hud-bot"><span>RANK: CREATIVE ELITE</span></div>
                 </div>
-                <div class="hex-decoration hex-1"></div>
-                <div class="hex-decoration hex-2"></div>
-                <div class="hex-decoration hex-3"></div>
             </div>
         </div>
-
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            <span class="scroll-text">SCROLL</span>
-        </div>
+        <div class="scroll-cue"><div class="sc-line"></div><span>SCROLL</span></div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="section-header">
-            <span class="section-number">01</span>
-            <h2 class="section-title">ABOUT <span class="accent">ME</span></h2>
-            <div class="section-line"></div>
-        </div>
-
-        <div class="about-container">
-            <div class="about-image-col">
-                <div class="about-image-card">
-                    <div class="card-frame">
-                        <img src="my_profile_sunanderhtet.jpg" alt="Suzie - About" class="about-img">
-                        <div class="card-overlay">
-                            <div class="card-data">
-                                <span class="data-label">STATUS</span>
-                                <span class="data-value online">ACTIVE</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="info-row">
-                            <span class="info-icon"><i class="fas fa-map-marker-alt"></i></span>
-                            <span class="info-text">Chiang Rai, Thailand</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-icon"><i class="fas fa-graduation-cap"></i></span>
-                            <span class="info-text">Mae Fah Luang University</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-icon"><i class="fas fa-gamepad"></i></span>
-                            <span class="info-text">Valorant Enthusiast</span>
-                        </div>
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about" class="sec">
+        <div class="sec-bg-txt">ABOUT</div>
+        <div class="sec-hdr"><span class="sh-num">01</span><h2 class="sh-title">ABOUT <span class="accent">ME</span></h2><div class="sh-line"><span></span></div></div>
+        <div class="about-grid">
+            <div class="about-img-col">
+                <div class="about-card">
+                    <div class="ac-img"><img src="my_profile_sunanderhtet.jpg" alt="Suzie"><div class="ac-ov"><span class="ac-status"><i class="fas fa-circle"></i> ACTIVE</span></div></div>
+                    <div class="ac-info">
+                        <div class="ac-row"><i class="fas fa-map-marker-alt"></i><span>Chiang Rai, Thailand</span></div>
+                        <div class="ac-row"><i class="fas fa-graduation-cap"></i><span>Mae Fah Luang University</span></div>
+                        <div class="ac-row"><i class="fas fa-gamepad"></i><span>Valorant Gamer</span></div>
                     </div>
                 </div>
             </div>
-
-            <div class="about-content-col">
-                <div class="about-text">
-                    <h3 class="about-greeting">
-                        Hey there! I'm <span class="accent">Suzie</span> 🎮
-                    </h3>
-                    <p>
-                        I'm <strong>Su Nandar Htet</strong>, a passionate creative graphics designer and a 
-                        <strong>Multimedia Technology & Animation</strong> student at 
-                        <a href="https://en.mfu.ac.th/admission/programmes/bachelors-degree/school-of-information-technology/bachelor-of-science-programme/bachelor-of-science-programme-in-multimedia-technology-and-animation.html" target="_blank" class="text-link">Mae Fah Luang University</a>. 
-                        My friends call me <span class="accent">Suzie</span>.
-                    </p>
-                    <p>
-                        I blend creativity with technology to craft stunning visual experiences. From graphic design 
-                        to animation and multimedia projects — I bring ideas to life with pixel-perfect precision. 
-                        When I'm not designing, you'll find me dominating in Valorant! 🎯
-                    </p>
-                    <p>
-                        My journey in design started with a deep love for art and evolved through my studies in 
-                        multimedia technology. I believe every design tells a story, and I'm here to make those 
-                        stories unforgettable.
-                    </p>
-                </div>
-
-                <div class="about-details">
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="fas fa-palette"></i></div>
-                        <div class="detail-info">
-                            <h4>Graphics Design</h4>
-                            <p>Creating visually stunning designs that captivate and communicate.</p>
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="fas fa-film"></i></div>
-                        <div class="detail-info">
-                            <h4>Animation</h4>
-                            <p>Bringing static visuals to life with motion and storytelling.</p>
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="fas fa-laptop-code"></i></div>
-                        <div class="detail-info">
-                            <h4>Multimedia</h4>
-                            <p>Integrating various media forms for immersive experiences.</p>
-                        </div>
-                    </div>
+            <div class="about-txt-col">
+                <h3 class="at-hi">Hey there! I'm <span class="accent">Suzie</span> 🎮</h3>
+                <p>I'm <strong>Su Nandar Htet</strong>, a passionate creative graphics designer and <strong>Multimedia Technology &amp; Animation</strong> student at <a href="https://en.mfu.ac.th/admission/programmes/bachelors-degree/school-of-information-technology/bachelor-of-science-programme/bachelor-of-science-programme-in-multimedia-technology-and-animation.html" target="_blank" rel="noopener" class="tl">Mae Fah Luang University</a>. My friends call me <span class="accent">Suzie</span>.</p>
+                <p>I blend creativity with technology to craft stunning visual experiences. From graphic design to animation and multimedia projects — I bring ideas to life with pixel-perfect precision. When I'm not designing, you'll find me dominating in <span class="accent">Valorant</span>! 🎯</p>
+                <p>I believe every design tells a story, and I'm here to make those stories unforgettable.</p>
+                <div class="ab-cards">
+                    <div class="abc"><div class="abc-icon"><i class="fas fa-palette"></i></div><h4>Graphics Design</h4><p>Stunning visuals that captivate.</p></div>
+                    <div class="abc"><div class="abc-icon"><i class="fas fa-film"></i></div><h4>Animation</h4><p>Bringing visuals to life.</p></div>
+                    <div class="abc"><div class="abc-icon"><i class="fas fa-laptop-code"></i></div><h4>Multimedia</h4><p>Immersive media experiences.</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section">
-        <div class="section-header">
-            <span class="section-number">02</span>
-            <h2 class="section-title">SKILL <span class="accent">ARSENAL</span></h2>
-            <div class="section-line"></div>
-        </div>
-
-        <div class="skills-container">
-            <div class="skills-radar">
-                <div class="radar-card">
-                    <h3 class="radar-title">COMBAT READY SKILLS</h3>
-                    <div class="skill-bars">
-                        <div class="skill-item" data-skill="95">
-                            <div class="skill-header">
-                                <span class="skill-name">Graphic Design</span>
-                                <span class="skill-percent">95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-header">
-                                <span class="skill-name">Adobe Photoshop</span>
-                                <span class="skill-percent">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item" data-skill="85">
-                            <div class="skill-header">
-                                <span class="skill-name">Adobe Illustrator</span>
-                                <span class="skill-percent">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item" data-skill="80">
-                            <div class="skill-header">
-                                <span class="skill-name">Animation / Motion</span>
-                                <span class="skill-percent">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item" data-skill="85">
-                            <div class="skill-header">
-                                <span class="skill-name">UI/UX Design</span>
-                                <span class="skill-percent">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item" data-skill="75">
-                            <div class="skill-header">
-                                <span class="skill-name">3D Modeling</span>
-                                <span class="skill-percent">75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item" data-skill="80">
-                            <div class="skill-header">
-                                <span class="skill-name">After Effects</span>
-                                <span class="skill-percent">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item" data-skill="70">
-                            <div class="skill-header">
-                                <span class="skill-name">Video Editing</span>
-                                <span class="skill-percent">70%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="--skill-width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- ═══ SKILLS ═══ -->
+    <section id="skills" class="sec sec-alt">
+        <div class="sec-bg-txt">SKILLS</div>
+        <div class="sec-hdr"><span class="sh-num">02</span><h2 class="sh-title">SKILL <span class="accent">ARSENAL</span></h2><div class="sh-line"><span></span></div></div>
+        <div class="skills-grid">
+            <div class="sk-panel">
+                <h3 class="skp-title"><i class="fas fa-crosshairs"></i> COMBAT READY</h3>
+                <div class="sk-list">
+                    <div class="sk-row"><span class="skn">Graphic Design</span><span class="skp">95%</span><div class="skb"><div class="skf" style="--w:95%"></div></div></div>
+                    <div class="sk-row"><span class="skn">Adobe Photoshop</span><span class="skp">90%</span><div class="skb"><div class="skf" style="--w:90%"></div></div></div>
+                    <div class="sk-row"><span class="skn">Adobe Illustrator</span><span class="skp">85%</span><div class="skb"><div class="skf" style="--w:85%"></div></div></div>
+                    <div class="sk-row"><span class="skn">Animation / Motion</span><span class="skp">80%</span><div class="skb"><div class="skf" style="--w:80%"></div></div></div>
+                    <div class="sk-row"><span class="skn">UI/UX Design</span><span class="skp">85%</span><div class="skb"><div class="skf" style="--w:85%"></div></div></div>
+                    <div class="sk-row"><span class="skn">3D Modeling</span><span class="skp">75%</span><div class="skb"><div class="skf" style="--w:75%"></div></div></div>
+                    <div class="sk-row"><span class="skn">After Effects</span><span class="skp">80%</span><div class="skb"><div class="skf" style="--w:80%"></div></div></div>
+                    <div class="sk-row"><span class="skn">Video Editing</span><span class="skp">70%</span><div class="skb"><div class="skf" style="--w:70%"></div></div></div>
                 </div>
             </div>
-
-            <div class="skills-tools">
-                <h3 class="tools-title">EQUIPPED TOOLS</h3>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fab fa-adobe"></i></div>
-                        <span class="tool-name">Photoshop</span>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fab fa-adobe"></i></div>
-                        <span class="tool-name">Illustrator</span>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fab fa-adobe"></i></div>
-                        <span class="tool-name">After Effects</span>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fab fa-adobe"></i></div>
-                        <span class="tool-name">Premiere Pro</span>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fab fa-figma"></i></div>
-                        <span class="tool-name">Figma</span>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-cube"></i></div>
-                        <span class="tool-name">Blender</span>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fab fa-adobe"></i></div>
-                        <span class="tool-name">InDesign</span>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-paint-brush"></i></div>
-                        <span class="tool-name">Procreate</span>
-                    </div>
+            <div class="sk-tools">
+                <h3 class="skp-title"><i class="fas fa-toolbox"></i> EQUIPPED TOOLS</h3>
+                <div class="tg">
+                    <div class="ti"><i class="fab fa-adobe"></i><span>Photoshop</span></div>
+                    <div class="ti"><i class="fab fa-adobe"></i><span>Illustrator</span></div>
+                    <div class="ti"><i class="fab fa-adobe"></i><span>After Effects</span></div>
+                    <div class="ti"><i class="fab fa-adobe"></i><span>Premiere Pro</span></div>
+                    <div class="ti"><i class="fab fa-figma"></i><span>Figma</span></div>
+                    <div class="ti"><i class="fas fa-cube"></i><span>Blender</span></div>
+                    <div class="ti"><i class="fab fa-adobe"></i><span>InDesign</span></div>
+                    <div class="ti"><i class="fas fa-paint-brush"></i><span>Procreate</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio-section">
-        <div class="section-header">
-            <span class="section-number">03</span>
-            <h2 class="section-title">MY <span class="accent">WORK</span></h2>
-            <div class="section-line"></div>
-        </div>
-
-        <div class="portfolio-container">
-            <div class="portfolio-grid">
-                <div class="portfolio-item large">
-                    <div class="portfolio-card">
-                        <img src="design-1.jpg" alt="Design Work 1" class="portfolio-img">
-                        <div class="portfolio-overlay">
-                            <div class="overlay-content">
-                                <span class="overlay-tag">FEATURED DESIGN</span>
-                                <h3 class="overlay-title">Creative Design Project</h3>
-                                <p class="overlay-desc">Graphics Design & Visual Art</p>
-                                <div class="overlay-cta">
-                                    <span class="view-btn"><i class="fas fa-expand"></i></span>
-                                </div>
-                            </div>
-                            <div class="overlay-border"></div>
-                        </div>
-                    </div>
+    <!-- ═══ PORTFOLIO ═══ -->
+    <section id="portfolio" class="sec">
+        <div class="sec-bg-txt">WORK</div>
+        <div class="sec-hdr"><span class="sh-num">03</span><h2 class="sh-title">MY <span class="accent">WORK</span></h2><div class="sh-line"><span></span></div></div>
+        <div class="pf-grid">
+            <div class="pf-item pf-big">
+                <div class="pf-card"><img src="design-1.jpg" alt="Design 1" class="pf-img">
+                    <div class="pf-ov"><span class="pf-tag">FEATURED</span><h3>Creative Design Project</h3><p>Graphics Design & Visual Art</p><button class="pf-exp"><i class="fas fa-expand"></i></button></div>
                 </div>
-
-                <div class="portfolio-item">
-                    <div class="portfolio-card">
-                        <img src="design-2.jpg" alt="Design Work 2" class="portfolio-img">
-                        <div class="portfolio-overlay">
-                            <div class="overlay-content">
-                                <span class="overlay-tag">DESIGN</span>
-                                <h3 class="overlay-title">Visual Art Project</h3>
-                                <p class="overlay-desc">Multimedia & Creative Design</p>
-                                <div class="overlay-cta">
-                                    <span class="view-btn"><i class="fas fa-expand"></i></span>
-                                </div>
-                            </div>
-                            <div class="overlay-border"></div>
-                        </div>
-                    </div>
+            </div>
+            <div class="pf-item">
+                <div class="pf-card"><img src="design-2.jpg" alt="Design 2" class="pf-img">
+                    <div class="pf-ov"><span class="pf-tag">DESIGN</span><h3>Visual Art Project</h3><p>Multimedia & Creative</p><button class="pf-exp"><i class="fas fa-expand"></i></button></div>
                 </div>
-
-                <div class="portfolio-item">
-                    <div class="portfolio-card gradient-card">
-                        <div class="coming-soon-card">
-                            <div class="cs-icon"><i class="fas fa-rocket"></i></div>
-                            <h3>More Coming Soon</h3>
-                            <p>New projects in progress...</p>
-                            <div class="cs-dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div class="pf-item">
+                <div class="pf-card pf-soon"><div class="pf-sc"><i class="fas fa-rocket pf-rk"></i><h3>Coming Soon</h3><p>New projects loading...</p><div class="pf-dots"><span></span><span></span><span></span></div></div></div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="section-header">
-            <span class="section-number">04</span>
-            <h2 class="section-title">GET IN <span class="accent">TOUCH</span></h2>
-            <div class="section-line"></div>
-        </div>
-
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3 class="contact-heading">Let's Work Together!</h3>
-                <p class="contact-desc">
-                    Ready to bring your ideas to life? Whether it's a design project, 
-                    collaboration, or just a friendly chat — I'm always open to connecting!
-                </p>
-
-                <div class="social-links">
-                    <a href="https://www.instagram.com/suz_thepanda/" target="_blank" class="social-card">
-                        <div class="social-icon"><i class="fab fa-instagram"></i></div>
-                        <div class="social-info">
-                            <span class="social-name">Instagram</span>
-                            <span class="social-handle">@suz_thepanda</span>
-                        </div>
-                        <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
-                    <a href="https://www.facebook.com/su.nandar.htet.293792" target="_blank" class="social-card">
-                        <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
-                        <div class="social-info">
-                            <span class="social-name">Facebook</span>
-                            <span class="social-handle">Su Nandar Htet</span>
-                        </div>
-                        <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/su-nandar-htet-a5abbb328/" target="_blank" class="social-card">
-                        <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
-                        <div class="social-info">
-                            <span class="social-name">LinkedIn</span>
-                            <span class="social-handle">Su Nandar Htet</span>
-                        </div>
-                        <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" class="sec sec-alt">
+        <div class="sec-bg-txt">CONTACT</div>
+        <div class="sec-hdr"><span class="sh-num">04</span><h2 class="sh-title">GET IN <span class="accent">TOUCH</span></h2><div class="sh-line"><span></span></div></div>
+        <div class="ct-grid">
+            <div class="ct-left">
+                <h3>Let's Work Together!</h3>
+                <p>Ready to bring your ideas to life? Whether it's a design project, collaboration, or just a friendly chat — I'm always open!</p>
+                <div class="soc-list">
+                    <a href="https://www.instagram.com/suz_thepanda/" target="_blank" rel="noopener" class="soc-row"><div class="soc-ic"><i class="fab fa-instagram"></i></div><div class="soc-info"><strong>Instagram</strong><span>@suz_thepanda</span></div><i class="fas fa-arrow-right soc-arr"></i></a>
+                    <a href="https://www.facebook.com/su.nandar.htet.293792" target="_blank" rel="noopener" class="soc-row"><div class="soc-ic"><i class="fab fa-facebook-f"></i></div><div class="soc-info"><strong>Facebook</strong><span>Su Nandar Htet</span></div><i class="fas fa-arrow-right soc-arr"></i></a>
+                    <a href="https://www.linkedin.com/in/su-nandar-htet-a5abbb328/" target="_blank" rel="noopener" class="soc-row"><div class="soc-ic"><i class="fab fa-linkedin-in"></i></div><div class="soc-info"><strong>LinkedIn</strong><span>Su Nandar Htet</span></div><i class="fas fa-arrow-right soc-arr"></i></a>
                 </div>
             </div>
-
-            <div class="contact-form-wrapper">
-                <form class="contact-form" id="contactForm">
-                    <div class="form-header">
-                        <span class="form-tag">// SEND MESSAGE</span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">AGENT NAME</label>
-                        <input type="text" class="form-input" placeholder="Your name..." required>
-                        <div class="input-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">COMM CHANNEL</label>
-                        <input type="email" class="form-input" placeholder="Your email..." required>
-                        <div class="input-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">MISSION BRIEF</label>
-                        <textarea class="form-input form-textarea" placeholder="Your message..." rows="4" required></textarea>
-                        <div class="input-line"></div>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <span class="btn-bg"></span>
-                        <span class="btn-text">SEND TRANSMISSION</span>
-                        <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
-                    </button>
+            <div class="ct-right">
+                <form class="ct-form" id="contactForm">
+                    <span class="cf-top">// SEND MESSAGE</span>
+                    <div class="cf-grp"><label>AGENT NAME</label><input type="text" placeholder="Your name..." required><div class="cf-line"></div></div>
+                    <div class="cf-grp"><label>COMM CHANNEL</label><input type="email" placeholder="Your email..." required><div class="cf-line"></div></div>
+                    <div class="cf-grp"><label>MISSION BRIEF</label><textarea placeholder="Your message..." rows="4" required></textarea><div class="cf-line"></div></div>
+                    <button type="submit" class="btn-v btn-send"><span class="bv-bg"></span><span class="bv-txt">SEND TRANSMISSION</span><i class="fas fa-paper-plane bv-arr"></i></button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-logo">
-                    <span class="logo-bracket">&lt;</span>
-                    <span class="logo-text">SUZIE</span>
-                    <span class="logo-bracket">/&gt;</span>
-                </div>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/suz_thepanda/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/su.nandar.htet.293792" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.linkedin.com/in/su-nandar-htet-a5abbb328/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="ft">
+        <div class="ft-inner">
+            <div class="ft-top"><div class="ft-logo"><span class="logo-v">V</span><span class="logo-name">SUZIE</span></div>
+                <div class="ft-soc">
+                    <a href="https://www.instagram.com/suz_thepanda/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/su.nandar.htet.293792" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/in/su-nandar-htet-a5abbb328/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            <div class="footer-divider"></div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Su Nandar Htet. All rights reserved.</p>
-                <p class="footer-tagline">Designed with <span class="accent">♥</span> & <span class="accent">Valorant</span> vibes</p>
-            </div>
+            <div class="ft-line"></div>
+            <div class="ft-bot"><p>&copy; 2026 Su Nandar Htet</p><p>Made with <span class="accent">♥</span> &amp; <span class="accent">Valorant</span> vibes</p></div>
         </div>
     </footer>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close"><i class="fas fa-times"></i></button>
-        <img src="" alt="Full size" class="lightbox-img" id="lightboxImg">
-    </div>
+    <!-- ═══ LIGHTBOX ═══ -->
+    <div class="lb" id="lb"><button class="lb-x" aria-label="Close"><i class="fas fa-times"></i></button><img src="" alt="" class="lb-img" id="lbImg"></div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
-        </svg>
-    </button>
-
-    <!-- Valorant V Watermark -->
-    <div class="val-watermark" aria-hidden="true">
-        <svg viewBox="0 0 200 200" width="200" height="200">
-            <path d="M60,30 L100,160 L140,30" fill="none" stroke="rgba(255,70,85,0.03)" stroke-width="15" stroke-linecap="round"/>
-        </svg>
-    </div>
+    <!-- ═══ BACK TO TOP ═══ -->
+    <button class="btt" id="btt" aria-label="Back to top"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
     <script src="script.js"></script>
 </body>
