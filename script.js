@@ -14,12 +14,12 @@
     const statuses = [
         'LOADING ASSETS...',
         'INITIALIZING HUD...',
-        'SYNCING DATA...',
-        'LOADING TEXTURES...',
+        'SYNCING AGENT DATA...',
         'COMPILING SHADERS...',
-        'CONNECTING...',
-        'DEPLOYING AGENT...',
-        'READY'
+        'DEPLOYING GLITCH MATRIX...',
+        'CALIBRATING CROSSHAIR...',
+        'AGENT SUZIE :: STANDBY...',
+        'READY — LET\'S GO'
     ];
     let loadProg = 0;
 
@@ -34,10 +34,20 @@
             if (loadProg >= 100) {
                 clearInterval(interval);
                 setTimeout(() => {
-                    loader.classList.add('hide');
-                    document.body.style.overflow = '';
-                    revealHero();
-                }, 600);
+                    // Glitch exit animation
+                    loader.classList.add('glitch-exit');
+                    // Trigger chromatic burst on page
+                    const chromatic = document.getElementById('chromaticAb');
+                    if (chromatic) {
+                        chromatic.style.boxShadow = 'inset -4px 0 0 rgba(255,70,85,.1), inset 4px 0 0 rgba(0,212,170,.1)';
+                        setTimeout(() => { chromatic.style.boxShadow = ''; }, 300);
+                    }
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        document.body.style.overflow = '';
+                        revealHero();
+                    }, 600);
+                }, 500);
             }
         }, 120);
     }
@@ -45,10 +55,22 @@
     document.body.style.overflow = 'hidden';
     window.addEventListener('load', () => setTimeout(animateLoader, 400));
 
-    /* ─── HERO REVEAL ─── */
+    /* ─── HERO REVEAL with glitch burst ─── */
     function revealHero() {
         const rows = document.querySelectorAll('.hn-row');
-        rows.forEach((r, i) => setTimeout(() => r.classList.add('show'), 200 + i * 250));
+        rows.forEach((r, i) => setTimeout(() => {
+            r.classList.add('show', 'show-glitch');
+            // Remove glitch class after animation completes
+            setTimeout(() => r.classList.remove('show-glitch'), 600);
+        }, 200 + i * 300));
+        // Trigger glitch burst on hero agent name
+        const agentName = document.querySelector('.ha-name');
+        if (agentName) {
+            setTimeout(() => {
+                agentName.classList.add('glitch-burst-active');
+                setTimeout(() => agentName.classList.remove('glitch-burst-active'), 400);
+            }, 1000);
+        }
         animateCounters();
     }
 
@@ -434,8 +456,17 @@
             for (let i = 0; i < count; i++) {
                 setTimeout(spawnGlitchLine, i * 30);
             }
+            // Random chromatic aberration burst
+            if (Math.random() > 0.7) {
+                const chromatic = document.getElementById('chromaticAb');
+                if (chromatic) {
+                    const intensity = Math.random() * 3 + 1;
+                    chromatic.style.boxShadow = `inset -${intensity}px 0 0 rgba(255,70,85,.06), inset ${intensity}px 0 0 rgba(0,212,170,.06)`;
+                    setTimeout(() => { chromatic.style.boxShadow = ''; }, 150);
+                }
+            }
             // Next burst: slower on mobile for perf
-            const delay = isMobileGlitch ? (Math.random() * 6000 + 4000) : (Math.random() * 4000 + 2000);
+            const delay = isMobileGlitch ? (Math.random() * 6000 + 4000) : (Math.random() * 3000 + 1500);
             setTimeout(glitchLoop, delay);
         }
         setTimeout(glitchLoop, 3000);

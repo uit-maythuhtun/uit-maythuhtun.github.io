@@ -81,9 +81,15 @@ img{display:block;max-width:100%}
 .emblem-svg{width:100%;height:100%}
 .hex-outer{stroke-dasharray:600;stroke-dashoffset:600;animation:drawHex 2s var(--ease2) forwards}
 .hex-inner{stroke-dasharray:400;stroke-dashoffset:400;animation:drawHex 2.5s var(--ease2) .3s forwards}
-.v-path{stroke-dasharray:200;stroke-dashoffset:200;animation:drawV 1.5s var(--ease2) .8s forwards}
+.s-path{stroke-dasharray:300;stroke-dashoffset:300;animation:drawS 1.8s var(--ease2) .6s forwards}
+.s-dot{opacity:0;animation:sDotReveal .4s var(--ease2) forwards}
+.s-dot.sd1{animation-delay:2s}
+.s-dot.sd2{animation-delay:2.2s}
+.s-cross{stroke-dasharray:60;stroke-dashoffset:60;animation:drawCross .6s var(--ease2) 1.8s forwards}
 @keyframes drawHex{to{stroke-dashoffset:0}}
-@keyframes drawV{to{stroke-dashoffset:0}}
+@keyframes drawS{to{stroke-dashoffset:0}}
+@keyframes sDotReveal{to{opacity:1}}
+@keyframes drawCross{to{stroke-dashoffset:0}}
 .hex-dot{animation:dotPulse 2s infinite}
 .hex-dot.d2{animation-delay:1s}
 @keyframes dotPulse{0%,100%{opacity:.3;r:2}50%{opacity:1;r:3.5}}
@@ -92,8 +98,75 @@ img{display:block;max-width:100%}
 }
 .emblem-ring.r1{inset:-15px;animation:ringPulse 3s infinite}
 .emblem-ring.r2{inset:-30px;border-color:rgba(0,212,170,.1);animation:ringPulse 3s .5s infinite}
+.emblem-ring.r3{inset:-45px;border-color:rgba(255,70,85,.05);animation:ringPulse 3s 1s infinite;border-style:dashed}
 @keyframes ringPulse{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.04);opacity:.7}}
-.loader-name{font-family:var(--ff2);font-size:28px;font-weight:800;letter-spacing:12px;color:var(--red);margin-top:8px}
+
+/* Glitch S overlay behind emblem */
+.emblem-glitch-s{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-family:var(--ff2);font-size:90px;font-weight:900;
+    color:transparent;-webkit-text-stroke:1px rgba(255,70,85,.06);
+    pointer-events:none;animation:emblemGlitchS 4s steps(2) infinite;
+    z-index:-1;
+}
+@keyframes emblemGlitchS{
+    0%,90%,100%{transform:translate(-50%,-50%);opacity:.3}
+    92%{transform:translate(calc(-50% + 3px),calc(-50% - 2px));opacity:.6;-webkit-text-stroke-color:rgba(0,212,170,.1)}
+    94%{transform:translate(calc(-50% - 4px),calc(-50% + 1px));opacity:.2;-webkit-text-stroke-color:rgba(255,70,85,.15)}
+    96%{transform:translate(calc(-50% + 1px),-50%);opacity:.4}
+}
+
+/* Loader name with glitch */
+.loader-name{
+    font-family:var(--ff2);font-size:32px;font-weight:800;letter-spacing:14px;
+    color:var(--red);margin-top:8px;position:relative;
+    animation:loaderNameGlitch 3s steps(1) infinite;
+}
+.loader-name::before,.loader-name::after{
+    content:attr(data-text);position:absolute;top:0;left:0;
+    width:100%;height:100%;pointer-events:none;
+}
+.loader-name::before{
+    color:var(--teal);animation:nameGlitch1 2.5s infinite;
+    clip-path:inset(0);
+}
+.loader-name::after{
+    color:#ff6b78;animation:nameGlitch2 2.5s infinite;
+    clip-path:inset(0);
+}
+.ln-glitch{position:relative;z-index:1}
+@keyframes loaderNameGlitch{
+    0%,92%,100%{transform:none}
+    93%{transform:skewX(-2deg)}
+    95%{transform:skewX(1deg) translateX(2px)}
+    97%{transform:skewX(-0.5deg)}
+}
+@keyframes nameGlitch1{
+    0%,100%{clip-path:inset(0);transform:none}
+    8%{clip-path:inset(20% 0 60% 0);transform:translateX(-4px)}
+    12%{clip-path:inset(0);transform:none}
+    42%{clip-path:inset(60% 0 10% 0);transform:translateX(3px)}
+    46%{clip-path:inset(0);transform:none}
+    78%{clip-path:inset(40% 0 30% 0);transform:translateX(-2px)}
+    82%{clip-path:inset(0);transform:none}
+}
+@keyframes nameGlitch2{
+    0%,100%{clip-path:inset(0);transform:none}
+    18%{clip-path:inset(50% 0 20% 0);transform:translateX(4px)}
+    22%{clip-path:inset(0);transform:none}
+    55%{clip-path:inset(15% 0 55% 0);transform:translateX(-3px)}
+    59%{clip-path:inset(0);transform:none}
+    88%{clip-path:inset(70% 0 5% 0);transform:translateX(2px)}
+    92%{clip-path:inset(0);transform:none}
+}
+
+/* Loader tagline */
+.loader-tagline{
+    font-family:var(--ff2);font-size:9px;letter-spacing:5px;color:var(--teal);
+    opacity:.5;animation:taglineBlink 2s steps(1) infinite;
+}
+@keyframes taglineBlink{0%,45%,52%,100%{opacity:.5}48%{opacity:0}}
+
 .loader-role{font-family:var(--ff2);font-size:10px;letter-spacing:6px;color:var(--gray);opacity:.7}
 .loader-progress{display:flex;align-items:center;gap:14px;width:250px}
 .progress-track{flex:1;height:3px;background:rgba(255,255,255,.07);border-radius:2px;position:relative;overflow:hidden}
@@ -103,6 +176,63 @@ img{display:block;max-width:100%}
 .loader-status-row{display:flex;align-items:center;gap:8px}
 .status-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:dotPulse 1.5s infinite}
 .status-text{font-family:var(--ff2);font-size:9px;letter-spacing:4px;color:var(--gray);opacity:.6}
+
+/* Loader data stream */
+.loader-data-stream{
+    display:flex;gap:18px;margin-top:4px;overflow:hidden;
+}
+.loader-data-stream span{
+    font-family:var(--ff2);font-size:8px;letter-spacing:3px;color:var(--red);
+    opacity:.15;animation:dataStreamScroll 4s linear infinite;
+}
+.loader-data-stream span:nth-child(2n){color:var(--teal);animation-delay:-.8s}
+.loader-data-stream span:nth-child(3n){animation-delay:-1.6s}
+@keyframes dataStreamScroll{
+    0%{transform:translateX(0);opacity:.15}
+    50%{opacity:.35}
+    100%{transform:translateX(-20px);opacity:.1}
+}
+
+/* Loader glitch overlay */
+.loader-glitch-overlay{
+    position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:transparent;
+    animation:loaderGlitchOverlay 6s steps(1) infinite;
+}
+@keyframes loaderGlitchOverlay{
+    0%,100%{background:transparent}
+    15%{background:linear-gradient(0deg,transparent 49%,rgba(255,70,85,.03) 49%,rgba(255,70,85,.03) 51%,transparent 51%)}
+    15.5%{background:transparent}
+    45%{background:linear-gradient(0deg,transparent 30%,rgba(0,212,170,.02) 30%,rgba(0,212,170,.02) 32%,transparent 32%)}
+    45.5%{background:transparent}
+    75%{background:linear-gradient(0deg,transparent 70%,rgba(255,70,85,.04) 70%,rgba(255,70,85,.04) 73%,transparent 73%)}
+    75.5%{background:transparent}
+}
+
+/* Loader chromatic */
+.loader-chromatic{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    animation:loaderChromatic 8s ease-in-out infinite;
+    mix-blend-mode:screen;
+}
+@keyframes loaderChromatic{
+    0%,88%,100%{box-shadow:none}
+    90%{box-shadow:inset -2px 0 0 rgba(255,70,85,.05),inset 2px 0 0 rgba(0,212,170,.05)}
+    92%{box-shadow:inset 3px 0 0 rgba(255,70,85,.08),inset -3px 0 0 rgba(0,212,170,.08)}
+    94%{box-shadow:none}
+}
+
+/* Global chromatic aberration overlay */
+.chromatic-aberration{
+    position:fixed;inset:0;z-index:9995;pointer-events:none;
+    animation:globalChromatic 10s ease-in-out infinite;
+}
+@keyframes globalChromatic{
+    0%,85%,100%{box-shadow:none}
+    87%{box-shadow:inset -1px 0 0 rgba(255,70,85,.04),inset 1px 0 0 rgba(0,212,170,.04)}
+    89%{box-shadow:inset 2px 0 0 rgba(255,70,85,.06),inset -2px 0 0 rgba(0,212,170,.06)}
+    91%{box-shadow:none}
+}
 
 /* ── CUSTOM CURSOR ── */
 .cursor-ring{
@@ -251,28 +381,40 @@ img{display:block;max-width:100%}
     font-family:var(--ff2);font-size:20px;font-weight:700;color:var(--teal);letter-spacing:4px;
     position:relative;
 }
-/* Glitch effect */
-.glitch{animation:glitchSkew 6s steps(2) infinite;contain:layout style}
+/* Glitch effect — Valorant-style intense chromatic split */
+.glitch{animation:glitchSkew 4s steps(2) infinite;contain:layout style}
 .glitch::before,.glitch::after{
     content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;
     clip-path:inset(0);will-change:clip-path,transform;
 }
-.glitch::before{color:var(--red);animation:glitch1 3s linear infinite}
-.glitch::after{color:var(--teal);animation:glitch2 3s linear infinite}
-@keyframes glitchSkew{0%,100%{transform:skew(0)}20%{transform:skew(-1deg)}40%{transform:skew(0.5deg)}60%{transform:skew(-0.3deg)}}
+.glitch::before{color:var(--red);animation:glitch1 2s linear infinite}
+.glitch::after{color:var(--teal);animation:glitch2 2s linear infinite}
+@keyframes glitchSkew{0%,100%{transform:skew(0)}15%{transform:skew(-2deg)}30%{transform:skew(1.5deg)}45%{transform:skew(-0.8deg)}60%{transform:skew(0.3deg)}}
 @keyframes glitch1{
-    0%,100%{clip-path:inset(0)}
-    5%{clip-path:inset(20% 0 60% 0);transform:translate(-3px)}
-    10%{clip-path:inset(0)}
-    35%{clip-path:inset(70% 0 5% 0);transform:translate(2px)}
+    0%,100%{clip-path:inset(0);transform:none}
+    3%{clip-path:inset(10% 0 70% 0);transform:translate(-5px,1px)}
+    6%{clip-path:inset(0);transform:none}
+    20%{clip-path:inset(30% 0 40% 0);transform:translate(-4px,-1px)}
+    24%{clip-path:inset(0);transform:none}
+    35%{clip-path:inset(60% 0 5% 0);transform:translate(3px,2px)}
     40%{clip-path:inset(0);transform:none}
+    55%{clip-path:inset(80% 0 0% 0);transform:translate(-3px)}
+    58%{clip-path:inset(0);transform:none}
+    75%{clip-path:inset(5% 0 85% 0);transform:translate(4px,-1px)}
+    78%{clip-path:inset(0);transform:none}
 }
 @keyframes glitch2{
-    0%,100%{clip-path:inset(0)}
-    15%{clip-path:inset(50% 0 20% 0);transform:translate(3px)}
-    20%{clip-path:inset(0);transform:none}
-    50%{clip-path:inset(10% 0 70% 0);transform:translate(-2px)}
-    55%{clip-path:inset(0);transform:none}
+    0%,100%{clip-path:inset(0);transform:none}
+    8%{clip-path:inset(40% 0 30% 0);transform:translate(5px,-1px)}
+    12%{clip-path:inset(0);transform:none}
+    28%{clip-path:inset(70% 0 10% 0);transform:translate(-4px,1px)}
+    32%{clip-path:inset(0);transform:none}
+    48%{clip-path:inset(5% 0 75% 0);transform:translate(3px,1px)}
+    52%{clip-path:inset(0);transform:none}
+    68%{clip-path:inset(50% 0 20% 0);transform:translate(-3px,-2px)}
+    72%{clip-path:inset(0);transform:none}
+    88%{clip-path:inset(25% 0 55% 0);transform:translate(2px)}
+    92%{clip-path:inset(0);transform:none}
 }
 
 .hero-desc{font-size:17px;color:var(--gray);max-width:480px;margin-bottom:28px;line-height:1.7}
@@ -376,7 +518,7 @@ img{display:block;max-width:100%}
 .sh-line{display:flex;justify-content:center;margin-top:14px}
 .sh-line span{width:50px;height:2px;background:linear-gradient(90deg,var(--red),var(--teal))}
 
-/* ── GLITCH HOVER on headers ── */
+/* ── GLITCH HOVER on headers — Valorant catchy ── */
 .glitch-hover{
     position:relative;display:inline-block;
 }
@@ -388,23 +530,25 @@ img{display:block;max-width:100%}
 .glitch-hover::before{color:var(--red)}
 .glitch-hover::after{color:var(--teal)}
 .glitch-hover:hover::before{
-    opacity:.7;animation:glitchH1 .4s steps(2) 1;
+    opacity:.8;animation:glitchH1 .5s steps(3) 1;
 }
 .glitch-hover:hover::after{
-    opacity:.5;animation:glitchH2 .4s steps(2) 1;
+    opacity:.6;animation:glitchH2 .5s steps(3) 1;
 }
 @keyframes glitchH1{
     0%{clip-path:inset(0);transform:none}
-    25%{clip-path:inset(30% 0 40% 0);transform:translate(-4px,1px)}
-    50%{clip-path:inset(60% 0 10% 0);transform:translate(3px,-1px)}
-    75%{clip-path:inset(10% 0 70% 0);transform:translate(-2px,2px)}
+    20%{clip-path:inset(20% 0 50% 0);transform:translate(-6px,2px) skewX(-3deg)}
+    40%{clip-path:inset(65% 0 5% 0);transform:translate(5px,-1px) skewX(2deg)}
+    60%{clip-path:inset(5% 0 80% 0);transform:translate(-3px,3px) skewX(-1deg)}
+    80%{clip-path:inset(40% 0 30% 0);transform:translate(4px,-2px)}
     100%{clip-path:inset(0);transform:none}
 }
 @keyframes glitchH2{
     0%{clip-path:inset(0);transform:none}
-    25%{clip-path:inset(50% 0 20% 0);transform:translate(3px,-2px)}
-    50%{clip-path:inset(15% 0 60% 0);transform:translate(-3px,1px)}
-    75%{clip-path:inset(70% 0 5% 0);transform:translate(2px,-1px)}
+    20%{clip-path:inset(55% 0 15% 0);transform:translate(5px,-2px) skewX(2deg)}
+    40%{clip-path:inset(10% 0 65% 0);transform:translate(-4px,1px) skewX(-2deg)}
+    60%{clip-path:inset(75% 0 0% 0);transform:translate(3px,-3px) skewX(1deg)}
+    80%{clip-path:inset(25% 0 45% 0);transform:translate(-5px,2px)}
     100%{clip-path:inset(0);transform:none}
 }
 
@@ -412,18 +556,19 @@ img{display:block;max-width:100%}
 .hero-glitch-bg{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
     font-family:var(--ff2);font-size:clamp(100px,20vw,280px);font-weight:900;
-    color:transparent;-webkit-text-stroke:1px rgba(255,70,85,.04);
+    color:transparent;-webkit-text-stroke:1px rgba(255,70,85,.05);
     pointer-events:none;user-select:none;z-index:0;white-space:nowrap;
-    animation:heroGlitchBg 8s ease-in-out infinite;
+    animation:heroGlitchBg 5s steps(1) infinite;
     max-width:100vw;overflow:hidden;
     will-change:transform,opacity;contain:strict;
 }
 @keyframes heroGlitchBg{
-    0%,88%,100%{opacity:.5;transform:translate(-50%,-50%)}
-    89%{opacity:.7;transform:translate(-50%,-50%) skewX(-1.5deg)}
-    91%{opacity:.2;transform:translate(calc(-50% + 4px),-50%) skewX(0.8deg)}
-    93%{opacity:.6;transform:translate(calc(-50% - 3px),-50%)}
-    95%{opacity:.5;transform:translate(-50%,-50%)}
+    0%,82%,100%{opacity:.5;transform:translate(-50%,-50%)}
+    83%{opacity:.8;transform:translate(-50%,-50%) skewX(-3deg);-webkit-text-stroke-color:rgba(255,70,85,.08)}
+    85%{opacity:.1;transform:translate(calc(-50% + 8px),calc(-50% + 2px)) skewX(2deg);-webkit-text-stroke-color:rgba(0,212,170,.06)}
+    87%{opacity:.9;transform:translate(calc(-50% - 5px),-50%) skewX(-1deg)}
+    89%{opacity:.3;transform:translate(calc(-50% + 3px),calc(-50% - 3px));-webkit-text-stroke-color:rgba(255,70,85,.1)}
+    91%{opacity:.6;transform:translate(-50%,-50%)}
 }
 
 /* ── HERO CIRCUIT LINES ── */
@@ -813,17 +958,61 @@ img{display:block;max-width:100%}
 .sr{opacity:0;transform:translateY(40px) translateZ(0);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .sr.visible{opacity:1;transform:translateY(0) translateZ(0)}
 
-/* ═══ GLITCH TRIGGER (on scroll) ═══ */
-.glitch-trigger::before{opacity:.7 !important;animation:glitchH1 .4s steps(2) 1 !important}
-.glitch-trigger::after{opacity:.5 !important;animation:glitchH2 .4s steps(2) 1 !important}
+/* ═══ GLITCH TRIGGER (on scroll) — Valorant burst ═══ */
+.glitch-trigger::before{opacity:.8 !important;animation:glitchH1 .5s steps(3) 1 !important}
+.glitch-trigger::after{opacity:.6 !important;animation:glitchH2 .5s steps(3) 1 !important}
 
-/* ═══ TOOL CARD GLITCH ═══ */
+/* ═══ TOOL CARD GLITCH — Valorant intensified ═══ */
 @keyframes toolGlitch{
-    0%{transform:translate(0)}
-    25%{transform:translate(-2px,1px)}
-    50%{transform:translate(1px,-1px)}
-    75%{transform:translate(-1px,0)}
-    100%{transform:translate(0)}
+    0%{transform:translate(0) skew(0)}
+    20%{transform:translate(-3px,2px) skew(-2deg)}
+    40%{transform:translate(2px,-1px) skew(1deg)}
+    60%{transform:translate(-1px,1px) skew(-0.5deg)}
+    80%{transform:translate(1px,-2px) skew(0.5deg)}
+    100%{transform:translate(0) skew(0)}
+}
+
+/* ═══ VALORANT GLITCH BURST — triggered on loader exit ═══ */
+@keyframes glitchBurst{
+    0%{transform:none;filter:none}
+    10%{transform:translate(-3px,1px) skewX(-2deg);filter:hue-rotate(20deg)}
+    20%{transform:translate(2px,-2px) skewX(1.5deg);filter:hue-rotate(-15deg) saturate(1.5)}
+    30%{transform:translate(-1px,2px);filter:none}
+    40%{transform:translate(3px,0) skewX(-1deg);filter:hue-rotate(10deg)}
+    50%{transform:none;filter:saturate(2) brightness(1.2)}
+    60%{transform:translate(-2px,-1px) skewX(1deg);filter:hue-rotate(-20deg)}
+    70%{transform:translate(1px,1px);filter:none}
+    80%{transform:translate(-1px,-1px) skewX(-0.5deg);filter:hue-rotate(5deg)}
+    90%{transform:translate(2px,0);filter:saturate(1.3)}
+    100%{transform:none;filter:none}
+}
+.glitch-burst-active{
+    animation:glitchBurst .4s steps(2) 1 !important;
+}
+
+/* ═══ LOADER HIDE with glitch ═══ */
+#loader.glitch-exit{
+    animation:loaderGlitchExit .6s steps(3) forwards;
+}
+@keyframes loaderGlitchExit{
+    0%{opacity:1;transform:none}
+    20%{opacity:1;transform:skewX(-3deg) translateX(5px);filter:hue-rotate(30deg)}
+    40%{opacity:.8;transform:skewX(2deg) translateX(-8px);filter:hue-rotate(-20deg) saturate(2)}
+    60%{opacity:.5;transform:skewX(-1deg) translateX(3px);filter:brightness(2)}
+    80%{opacity:.2;transform:skewY(1deg) translateY(-5px);filter:blur(2px)}
+    100%{opacity:0;visibility:hidden;pointer-events:none}
+}
+
+/* ═══ HERO REVEAL GLITCH ═══ */
+.hn-row.show-glitch{
+    animation:heroNameReveal .6s steps(2) forwards;
+}
+@keyframes heroNameReveal{
+    0%{opacity:0;transform:translateY(30px) skewX(5deg);filter:blur(4px)}
+    30%{opacity:.7;transform:translateY(10px) skewX(-3deg);filter:blur(1px) hue-rotate(20deg)}
+    50%{opacity:1;transform:translateY(-5px) skewX(1deg);filter:none}
+    70%{opacity:.8;transform:translateY(2px) skewX(-0.5deg)}
+    100%{opacity:1;transform:none;filter:none}
 }
 
 /* ═══ REDUCED MOTION ═══ */
